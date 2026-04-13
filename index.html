@@ -101,6 +101,37 @@ section{padding:3.5rem 0}
 .case-desc{font-size:13px;color:var(--cream2);line-height:1.65}
 .case-arrow{display:inline-flex;align-items:center;gap:8px;margin-top:1.25rem;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--cream3);transition:color 0.2s}
 .case-card:hover .case-arrow{color:var(--cream)}
+.case-thumb-gold {
+    background: linear-gradient(135deg, rgba(184,169,138,0.12) 0%, rgba(184,169,138,0.04) 100%);
+    border: 1px solid rgba(184,169,138,0.18);
+    position: relative;
+    height: 160px;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem;
+  }
+ 
+  .gold-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #b8a98a;
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+  }
+ 
+  .badge-gold {
+    background: rgba(184,169,138,0.12);
+    color: #b8a98a;
+    border: 1px solid rgba(184,169,138,0.3);
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+  }
 
 /* FOCUS GRID */
 .focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border)}
@@ -324,6 +355,22 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
           </div>
           <div class="case-title">CRM (Salesforce) Embedded AI Agent</div>
           <div class="case-desc">Transforming CRM from a passive system of record into an active, intelligent partner — enabling natural language queries, proactive next steps, and real-time account intelligence.</div>
+          <div class="case-arrow">Read case study <span>→</span></div>
+        </div>
+      </a>
+      <a href="aurelian_scale.html" class="case-card">
+        <div class="case-thumb case-thumb-gold">
+          <div class="case-thumb-dot gold-dot"></div>
+          <span class="case-thumb-label">Aurelian</span>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="case-badge badge-gold">Product strategy</span>
+            <span class="case-badge badge-gold">AI/ML</span>
+            <span class="case-badge badge-gray">Public safety</span>
+          </div>
+          <div class="case-title">Aurelian — From 10 to 1000: Scaling a 911 AI Platform</div>
+          <div class="case-desc">A product perspective on how Aurelian can scale from early customers to enterprise reach — three structural bottlenecks, two product levers, and where a Founding PM adds the most value.</div>
           <div class="case-arrow">Read case study <span>→</span></div>
         </div>
       </a>
