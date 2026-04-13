@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ziyi Wang — AI Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;500;700&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0E0E0C;
+  --bg2:#161614;
+  --bg3:#1E1E1B;
+  --cream:#F0EDE6;
+  --cream2:#C8C4BB;
+  --cream3:#7A7770;
+  --border:rgba(240,237,230,0.08);
+  --border2:rgba(240,237,230,0.16);
+  --teal:#1D9E75;--teal-bg:rgba(29,158,117,0.12);--teal-border:rgba(29,158,117,0.3);
+  --blue:#378ADD;--blue-bg:rgba(55,138,221,0.12);--blue-border:rgba(55,138,221,0.3);
+  --purple:#7F77DD;--purple-bg:rgba(127,119,221,0.12);--purple-border:rgba(127,119,221,0.3);
+  --amber:#EF9F27;--amber-bg:rgba(239,159,39,0.12);--amber-border:rgba(239,159,39,0.3);
+  --red:#E24B4A;--red-bg:rgba(226,75,74,0.12);--red-border:rgba(226,75,74,0.3);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--cream);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NOISE TEXTURE OVERLAY */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(16px);background:rgba(14,14,12,0.8)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:var(--cream);text-decoration:none;letter-spacing:0.02em}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:12px;color:var(--cream3);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--cream)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 0 5rem;position:relative;overflow:hidden}
+.hero-bg-accent{position:absolute;top:-200px;right:-300px;width:700px;height:700px;background:radial-gradient(circle,rgba(29,158,117,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-bg-accent2{position:absolute;bottom:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(55,138,221,0.05) 0%,transparent 70%);pointer-events:none}
+.container{max-width:1080px;margin:0 auto;padding:0 3rem;position:relative;z-index:1}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s ease 0.1s both}
+.eyebrow-line{width:32px;height:1px;background:var(--teal)}
+.eyebrow-text{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal)}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(48px,7vw,88px);font-weight:400;line-height:1.05;letter-spacing:-1px;margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s ease 0.2s both}
+.hero-title em{font-style:italic;color:var(--cream2)}
+.hero-body{max-width:520px;font-size:16px;color:var(--cream2);line-height:1.8;margin-bottom:3rem;font-weight:400;opacity:0;animation:fadeUp 0.7s ease 0.3s both}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:3rem;opacity:0;animation:fadeUp 0.7s ease 0.4s both}
+.tag{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:5px 14px;border:1px solid var(--border2);border-radius:2px;color:var(--cream3)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s ease 0.5s both}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:13px 28px;border-radius:2px;text-decoration:none;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:var(--cream);color:var(--bg);border:1px solid var(--cream)}
+.btn-primary:hover{background:transparent;color:var(--cream)}
+.btn-secondary{background:transparent;color:var(--cream);border:1px solid var(--border2)}
+.btn-secondary:hover{border-color:var(--cream2)}
+
+/* HERO STATS */
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:3px;margin-top:5rem;opacity:0;animation:fadeUp 0.7s ease 0.6s both;overflow:hidden}
+.stat{background:var(--bg2);padding:1.5rem;transition:background 0.2s}
+.stat:hover{background:var(--bg3)}
+.stat-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream3);margin-bottom:8px}
+.stat-value{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:4px}
+.stat-sub{font-size:12px;color:var(--cream3)}
+
+/* SECTION */
+section{padding:5rem 0}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:3rem}
+.section-num{font-family:'DM Mono',monospace;font-size:12px;color:var(--cream3)}
+.section-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:400}
+.section-line{flex:1;height:1px;background:var(--border)}
+
+/* CASE CARDS */
+.cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border)}
+.case-card{background:var(--bg2);text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:background 0.2s}
+.case-card:hover{background:var(--bg3)}
+.case-card::after{content:'';position:absolute;inset:0;border:1px solid transparent;transition:border-color 0.2s;pointer-events:none}
+.case-card:hover::after{border-color:var(--border2)}
+.case-thumb{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.case-thumb-teal{background:linear-gradient(135deg,rgba(29,158,117,0.15),rgba(29,158,117,0.05))}
+.case-thumb-blue{background:linear-gradient(135deg,rgba(55,138,221,0.15),rgba(55,138,221,0.05))}
+.case-thumb-label{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;letter-spacing:-0.3px}
+.case-thumb-teal .case-thumb-label{color:var(--teal)}
+.case-thumb-blue .case-thumb-label{color:var(--blue)}
+.case-thumb-dot{position:absolute;top:1.25rem;right:1.25rem;width:8px;height:8px;border-radius:50%}
+.teal-dot{background:var(--teal)}
+.blue-dot{background:var(--blue)}
+.case-body{padding:2rem}
+.case-meta{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.case-badge{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:2px}
+.badge-teal{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-border)}
+.badge-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.badge-gray{background:rgba(240,237,230,0.05);color:var(--cream3);border:1px solid var(--border)}
+.case-title{font-size:17px;font-weight:700;line-height:1.35;margin-bottom:0.75rem;letter-spacing:0.01em}
+.case-desc{font-size:13px;color:var(--cream2);line-height:1.7}
+.case-arrow{display:inline-flex;align-items:center;gap:8px;margin-top:1.5rem;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--cream3);transition:color 0.2s}
+.case-card:hover .case-arrow{color:var(--cream)}
+
+/* FOCUS GRID */
+.focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border)}
+.focus-card{background:var(--bg2);padding:2rem;transition:background 0.2s}
+.focus-card:hover{background:var(--bg3)}
+.focus-accent{width:32px;height:2px;margin-bottom:1.25rem;border-radius:1px}
+.focus-accent-teal{background:var(--teal)}
+.focus-accent-blue{background:var(--blue)}
+.focus-accent-purple{background:var(--purple)}
+.focus-accent-amber{background:var(--amber)}
+.focus-card-title{font-size:15px;font-weight:700;margin-bottom:0.5rem;letter-spacing:0.02em}
+.focus-card-body{font-size:13px;color:var(--cream2);line-height:1.7}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start}
+.about-body{font-size:15px;color:var(--cream2);line-height:1.9}
+.about-body p{margin-bottom:1.25rem}
+.about-quote{border-left:2px solid var(--teal);padding:1rem 0 1rem 1.5rem;margin:2rem 0}
+.about-quote p{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--cream);line-height:1.6}
+.about-cards{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.about-card{background:var(--bg2);padding:1.25rem 1.5rem;transition:background 0.2s}
+.about-card:hover{background:var(--bg3)}
+.about-card-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream3);margin-bottom:6px}
+.about-card-value{font-size:13px;color:var(--cream);font-family:'DM Mono',monospace}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center}
+.footer-left{font-family:'Playfair Display',serif;font-size:15px;color:var(--cream2)}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--cream)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .container{padding:0 1.5rem}
+  .hero-title{font-size:42px}
+  .hero-stats,.cases-grid,.focus-grid,.about-grid{grid-template-columns:1fr}
+  footer{padding:1.5rem;flex-direction:column;gap:1rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Ziyi Wang</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#focus">Focus</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="hero-bg-accent"></div>
+    <div class="hero-bg-accent2"></div>
+    <div class="container">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">AI Product Manager</span>
+      </div>
+      <h1 class="hero-title">I build tools that make<br>teams <em>faster, smarter.</em></h1>
+      <p class="hero-body">Specializing in AI-native products, agentic systems, and enterprise workflow automation — turning complex architectures into experiences people actually trust and use.</p>
+      <div class="hero-tags">
+        <span class="tag">AI/ML Strategy</span>
+        <span class="tag">Multi-agent Systems</span>
+        <span class="tag">CRM & Salesforce</span>
+        <span class="tag">0→1 Builds</span>
+        <span class="tag">Trust Layer Design</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-primary">View case studies</a>
+        <a href="#contact" class="btn btn-secondary">Connect →</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-label">Primary focus</div>
+          <div class="stat-value">AI Agents</div>
+          <div class="stat-sub">Agentic product design</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Domain</div>
+          <div class="stat-value">CRM + CRE</div>
+          <div class="stat-sub">Platform integrations</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Method</div>
+          <div class="stat-value">0 → 1</div>
+          <div class="stat-sub">Ideation to demo</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Core thesis</div>
+          <div class="stat-value">Trust</div>
+          <div class="stat-sub">The real adoption barrier</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE STUDIES -->
+  <div class="container" id="work">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Case studies</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cases-grid reveal">
+      <a href="cre-agentos.html" class="case-card">
+        <div class="case-thumb case-thumb-teal">
+          <div class="case-thumb-dot teal-dot"></div>
+          <span class="case-thumb-label">CRE AgentOS</span>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="case-badge badge-teal">Demo</span>
+            <span class="case-badge badge-teal">Multi-agent</span>
+            <span class="case-badge badge-gray">Commercial Real Estate</span>
+          </div>
+          <div class="case-title">CRE AgentOS — AI Operating System for Commercial Real Estate</div>
+          <div class="case-desc">A multi-agent platform with an architectural trust layer that makes AI output reliable enough to act on in high-stakes real estate decisions. Built with Red Team agent + Drift Detector.</div>
+          <div class="case-arrow">Read case study <span>→</span></div>
+        </div>
+      </a>
+      <a href="crm-agent.html" class="case-card">
+        <div class="case-thumb case-thumb-blue">
+          <div class="case-thumb-dot blue-dot"></div>
+          <span class="case-thumb-label">CRM AI Agent</span>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="case-badge badge-blue">Ideation</span>
+            <span class="case-badge badge-blue">Salesforce</span>
+            <span class="case-badge badge-gray">CRM</span>
+          </div>
+          <div class="case-title">CRM (Salesforce) Embedded AI Agent</div>
+          <div class="case-desc">Transforming CRM from a passive system of record into an active, intelligent partner — enabling natural language queries, proactive next steps, and real-time account intelligence.</div>
+          <div class="case-arrow">Read case study <span>→</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOCUS AREAS -->
+  <div class="container" id="focus" style="padding-top:5rem">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Focus areas</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="focus-grid reveal">
+      <div class="focus-card">
+        <div class="focus-accent focus-accent-teal"></div>
+        <div class="focus-card-title">AI Agents & agentic product design</div>
+        <div class="focus-card-body">Multi-agent orchestration, trust layers, and routing logic that make AI output reliable enough to act on. The architectural decisions that differentiate products in the agentic era.</div>
+      </div>
+      <div class="focus-card">
+        <div class="focus-accent focus-accent-blue"></div>
+        <div class="focus-card-title">CRM & platform integrations</div>
+        <div class="focus-card-body">Salesforce, workflow automation, and embedding intelligence into tools teams already use daily. Making AI feel native rather than bolted on.</div>
+      </div>
+      <div class="focus-card">
+        <div class="focus-accent focus-accent-purple"></div>
+        <div class="focus-card-title">0→1 product development</div>
+        <div class="focus-card-body">Problem framing, architecture decisions, demo builds, and production roadmaps. From identifying the right problem to building the right thing — and knowing the difference.</div>
+      </div>
+      <div class="focus-card">
+        <div class="focus-accent focus-accent-amber"></div>
+        <div class="focus-card-title">AI/ML-driven product strategy</div>
+        <div class="focus-card-body">Designing products where AI is the core value, not a feature bolt-on. Understanding model capabilities, eval frameworks, and where human judgment must remain in the loop.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="container" id="about" style="padding-top:5rem;padding-bottom:5rem">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-body">
+        <p>I'm a Product Manager who specializes in AI-native products, agentic systems, and enterprise workflow automation.</p>
+        <div class="about-quote">
+          <p>Most PM portfolios show what was built. I try to show why the architecture was designed that way, what tradeoffs were made consciously, and what I'd do differently in production.</p>
+        </div>
+        <p>My core thesis: enterprise AI adoption is blocked not by capability but by <strong>trust</strong>. Architecturally addressing trust — through explainability, adversarial challenge, and temporal monitoring — is the differentiating PM judgment call that most teams skip.</p>
+        <p style="color:var(--cream3);font-size:14px;margin-top:2rem">Open to PM roles in AI, enterprise SaaS, and agentic product development.</p>
+      </div>
+      <div>
+        <div class="about-cards">
+          <div class="about-card">
+            <div class="about-card-label">Specialization</div>
+            <div class="about-card-value">AI/ML product strategy</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-label">Build stack</div>
+            <div class="about-card-value">Python · Streamlit · Claude API</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-label">Methodology</div>
+            <div class="about-card-value">Agile · iterative delivery</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-label">Core domain</div>
+            <div class="about-card-value">CRE · CRM · agentic systems</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-label">Contact</div>
+            <div class="about-card-value">zwang9571@gmail.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="contact">
+  <div class="footer-left">Ziyi Wang · AI Product Manager</div>
+  <div class="footer-links">
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="mailto:zwang9571@gmail.com">Email</a>
+    <a href="#">Resume</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
