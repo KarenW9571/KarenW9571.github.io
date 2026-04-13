@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM AI Agent — Ziyi Wang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;500;700&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0E0E0C;--bg2:#161614;--bg3:#1E1E1B;
+  --cream:#F0EDE6;--cream2:#C8C4BB;--cream3:#7A7770;
+  --border:rgba(240,237,230,0.08);--border2:rgba(240,237,230,0.16);
+  --teal:#1D9E75;--teal-bg:rgba(29,158,117,0.12);--teal-border:rgba(29,158,117,0.3);
+  --blue:#378ADD;--blue-bg:rgba(55,138,221,0.12);--blue-border:rgba(55,138,221,0.3);
+  --purple:#7F77DD;--purple-bg:rgba(127,119,221,0.12);--purple-border:rgba(127,119,221,0.3);
+  --amber:#EF9F27;--amber-bg:rgba(239,159,39,0.12);--amber-border:rgba(239,159,39,0.3);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--cream);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(16px);background:rgba(14,14,12,0.8)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);text-decoration:none}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:12px;color:var(--cream3);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--cream)}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream3);text-decoration:none;margin-bottom:2.5rem;transition:color 0.2s}
+.back-link:hover{color:var(--cream)}
+
+.container{max-width:900px;margin:0 auto;padding:0 3rem;position:relative;z-index:1}
+
+.case-hero{padding:8rem 0 4rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-100px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(55,138,221,0.08) 0%,transparent 70%);pointer-events:none}
+.case-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.badge{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:2px}
+.badge-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.badge-gray{background:rgba(240,237,230,0.05);color:var(--cream3);border:1px solid var(--border)}
+.case-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,52px);font-weight:400;line-height:1.1;letter-spacing:-0.5px;margin-bottom:1rem}
+.case-subtitle{font-size:18px;color:var(--cream2);font-weight:400;margin-bottom:1.5rem;line-height:1.6}
+.case-meta-line{font-family:'DM Mono',monospace;font-size:12px;color:var(--cream3)}
+
+hr{border:none;border-top:1px solid var(--border);margin:3rem 0}
+
+.content h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;margin:3rem 0 1.25rem}
+.content p{color:var(--cream2);line-height:1.85;margin-bottom:1rem;font-size:15px}
+
+.pullquote{border-left:2px solid var(--blue);padding:1rem 0 1rem 1.75rem;margin:2rem 0}
+.pullquote p{font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--cream);line-height:1.55}
+
+/* PAIN CARDS */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0}
+.pain-card{background:var(--bg2);padding:1.5rem;transition:background 0.2s}
+.pain-card:hover{background:var(--bg3)}
+.pain-accent{width:24px;height:2px;background:var(--blue);margin-bottom:1rem;border-radius:1px}
+.pain-title{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--cream)}
+.pain-body{font-size:13px;color:var(--cream2);line-height:1.7}
+
+/* STORY CARDS */
+.stories{display:flex;flex-direction:column;gap:1px;background:var(--border);margin:1.5rem 0}
+.story{background:var(--bg2);padding:1.25rem 1.5rem;font-size:14px;line-height:1.7;transition:background 0.2s}
+.story:hover{background:var(--bg3)}
+.story .as{color:var(--cream3)}
+.story .want{font-weight:700;color:var(--cream)}
+.story .so{color:var(--cream2)}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:13px;margin:1.25rem 0}
+th{text-align:left;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--cream3);padding:0 1rem 12px 0;border-bottom:1px solid var(--border)}
+td{padding:12px 1rem 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--cream2)}
+td:first-child{color:var(--cream);font-weight:500}
+td:last-child{color:var(--cream3)}
+
+/* MVP */
+.mvp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0}
+.mvp-card{background:var(--bg2);padding:1.5rem;transition:background 0.2s}
+.mvp-card:hover{background:var(--bg3)}
+.mvp-num{font-family:'Playfair Display',serif;font-size:30px;color:var(--cream3);margin-bottom:10px}
+.mvp-title{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--cream)}
+.mvp-body{font-size:12px;color:var(--cream2);line-height:1.7}
+
+.links-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:1rem}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:11px 24px;border-radius:2px;text-decoration:none;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:var(--cream);color:var(--bg);border:1px solid var(--cream)}
+.btn-primary:hover{background:transparent;color:var(--cream)}
+.btn-secondary{background:transparent;color:var(--cream);border:1px solid var(--border2)}
+.btn-secondary:hover{border-color:var(--cream2)}
+
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;margin-top:4rem}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--cream)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;animation:fadeUp 0.6s ease both}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.2s}.d3{animation-delay:0.3s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:0 1.5rem}.container{padding:0 1.5rem}
+  .pain-grid,.mvp-grid{grid-template-columns:1fr}
+  footer{padding:1.5rem;flex-direction:column;gap:1rem}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Ziyi Wang</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+<div class="case-hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <a href="index.html" class="back-link fade-in d1">← All case studies</a>
+    <div class="case-badges fade-in d1">
+      <span class="badge badge-blue">Ideation</span>
+      <span class="badge badge-blue">Salesforce</span>
+      <span class="badge badge-gray">CRM</span>
+      <span class="badge badge-gray">AI/ML</span>
+    </div>
+    <h1 class="case-title fade-in d2">CRM (Salesforce)<br>Embedded AI Agent</h1>
+    <p class="case-subtitle fade-in d2">Transforming CRM from a passive system of record into an active, intelligent partner</p>
+    <p class="case-meta-line fade-in d3">Ideation · Product spec · June 2025</p>
+  </div>
+</div>
+
+<div class="container content">
+  <hr>
+
+  <div class="reveal">
+    <div class="pullquote">
+      <p>Embedding an AI Agent into CRM platforms represents the next evolution in empowering sales and support teams — transforming CRM from a passive system of record into an active, intelligent partner in customer success.</p>
+    </div>
+
+    <h2>Context</h2>
+    <p>Sales advisors and support agents spend hours every day context-switching between CRM records, email, external news sources, and internal knowledge bases. No single view consolidates the information they need at the moment they need it. The CRM holds the data — but doesn't think with it.</p>
+    <p>Meanwhile, platforms like Microsoft Copilot and Google Gemini have demonstrated how agentic AI can transform productivity workflows. The same shift hasn't happened inside CRM — yet.</p>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>User pain points</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-accent"></div>
+        <div class="pain-title">Fragmented data experience</div>
+        <div class="pain-body">Users rely on CRM, email, calendar, knowledge bases, and external tools — but no single view consolidates this information at the point of need.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-accent"></div>
+        <div class="pain-title">Context switching slows them down</div>
+        <div class="pain-body">Switching between systems, tabs, and records during calls or case resolution fragments attention and creates errors.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-accent"></div>
+        <div class="pain-title">Manual prep before every interaction</div>
+        <div class="pain-body">Reps spend 15–30 minutes preparing for each customer call — pulling data that AI could surface in seconds.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-accent"></div>
+        <div class="pain-title">Inconsistent task follow-through</div>
+        <div class="pain-body">Next steps get logged inconsistently or not at all, creating pipeline gaps that compound over time.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>User stories</h2>
+    <div class="stories">
+      <div class="story"><span class="as">As a</span> Sales Advisor, <span class="want">I want to ask "What's the latest update on ACME?" directly in the CRM,</span> <span class="so">so that I can find relevant deal information without clicking through multiple tabs or records.</span></div>
+      <div class="story"><span class="as">As a</span> Sales Advisor, <span class="want">I want a one-click summary of an account's status, activities, risks, and upcoming milestones,</span> <span class="so">so that I can prepare for calls with confidence and context.</span></div>
+      <div class="story"><span class="as">As a</span> Sales Advisor or Support Agent, <span class="want">I want AI-suggested next steps after each interaction,</span> <span class="so">so that I don't miss important follow-ups and can move deals or cases forward more efficiently.</span></div>
+      <div class="story"><span class="as">As a</span> Sales Advisor, <span class="want">I want to see external news or LinkedIn context about an account inline,</span> <span class="so">so that I can bring up relevant updates during client conversations and build rapport.</span></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>Competitive landscape</h2>
+    <table>
+      <thead><tr><th>Platform</th><th>Agentic capabilities</th><th>Primary domain</th></tr></thead>
+      <tbody>
+        <tr><td>Microsoft Copilot (M365)</td><td>Natural language to generate content, create charts, summarize meetings</td><td>Productivity / knowledge work</td></tr>
+        <tr><td>Google Gemini (Workspace)</td><td>Compose emails, draft docs, organize data, create trackers from chats</td><td>Productivity / knowledge work</td></tr>
+        <tr><td>Salesforce Einstein</td><td>Opportunity scoring, email suggestions, case classification — narrow automation</td><td>CRM (narrow AI)</td></tr>
+        <tr><td>This proposal</td><td>Unified NL interface, multi-source synthesis, proactive next steps, external data pull</td><td>CRM (agentic AI)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>MVP priorities</h2>
+    <div class="mvp-grid">
+      <div class="mvp-card">
+        <div class="mvp-num">01</div>
+        <div class="mvp-title">Natural language CRM query</div>
+        <div class="mvp-body">Ask plain-language questions about any account, deal, or case and get an instant structured answer from CRM data.</div>
+      </div>
+      <div class="mvp-card">
+        <div class="mvp-num">02</div>
+        <div class="mvp-title">One-click account brief</div>
+        <div class="mvp-body">Pre-call summary: status, recent activity, risks, open tasks, and upcoming milestones — surfaced automatically.</div>
+      </div>
+      <div class="mvp-card">
+        <div class="mvp-num">03</div>
+        <div class="mvp-title">AI-suggested next steps</div>
+        <div class="mvp-body">After each interaction, the agent recommends concrete actions and can log them into the CRM with one click.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>Summary</h2>
+    <p>This case study explored the opportunity to embed a unified AI Agent into Salesforce — one that enables natural language interaction, synthesizes internal and external data, and proactively supports real-time decision-making during critical client interactions.</p>
+    <p>The proposed AI Agent MVP targets the most impactful pain points shared by Sales Advisors, Customer Support Agents, and Sales Operations teams, with clear success metrics tied to efficiency, adoption, and user satisfaction.</p>
+
+    <h2>Links</h2>
+    <div class="links-row">
+      <a href="index.html" class="btn btn-secondary">← Back to portfolio</a>
+      <a href="https://linkedin.com" class="btn btn-secondary">LinkedIn</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <span style="font-family:'Playfair Display',serif;font-size:15px;color:var(--cream2)">Ziyi Wang · AI Product Manager</span>
+  <div class="footer-links">
+    <a href="index.html#work">All work</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="mailto:zwang9571@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
