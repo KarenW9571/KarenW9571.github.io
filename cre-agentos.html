@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRE AgentOS — Ziyi Wang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;500;700&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0E0E0C;--bg2:#161614;--bg3:#1E1E1B;
+  --cream:#F0EDE6;--cream2:#C8C4BB;--cream3:#7A7770;
+  --border:rgba(240,237,230,0.08);--border2:rgba(240,237,230,0.16);
+  --teal:#1D9E75;--teal-bg:rgba(29,158,117,0.12);--teal-border:rgba(29,158,117,0.3);
+  --blue:#378ADD;--blue-bg:rgba(55,138,221,0.12);--blue-border:rgba(55,138,221,0.3);
+  --purple:#7F77DD;--purple-bg:rgba(127,119,221,0.12);--purple-border:rgba(127,119,221,0.3);
+  --amber:#EF9F27;--amber-bg:rgba(239,159,39,0.12);--amber-border:rgba(239,159,39,0.3);
+  --red:#E24B4A;--red-bg:rgba(226,75,74,0.12);--red-border:rgba(226,75,74,0.3);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--cream);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(16px);background:rgba(14,14,12,0.8)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);text-decoration:none}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:12px;color:var(--cream3);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--cream)}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream3);text-decoration:none;margin-bottom:2.5rem;transition:color 0.2s}
+.back-link:hover{color:var(--cream)}
+
+.container{max-width:900px;margin:0 auto;padding:0 3rem;position:relative;z-index:1}
+
+/* HERO */
+.case-hero{padding:8rem 0 4rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-100px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(29,158,117,0.08) 0%,transparent 70%);pointer-events:none}
+.case-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.badge{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:2px}
+.badge-teal{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-border)}
+.badge-gray{background:rgba(240,237,230,0.05);color:var(--cream3);border:1px solid var(--border)}
+.case-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,58px);font-weight:400;line-height:1.1;letter-spacing:-0.5px;margin-bottom:1rem}
+.case-subtitle{font-size:18px;color:var(--cream2);font-weight:400;margin-bottom:1.5rem;line-height:1.6}
+.case-meta-line{font-family:'DM Mono',monospace;font-size:12px;color:var(--cream3)}
+
+hr{border:none;border-top:1px solid var(--border);margin:3rem 0}
+
+/* CONTENT */
+.content h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;margin:3rem 0 1.25rem}
+.content p{color:var(--cream2);line-height:1.85;margin-bottom:1rem;font-size:15px}
+
+/* PULLQUOTE */
+.pullquote{border-left:2px solid var(--teal);padding:1rem 0 1rem 1.75rem;margin:2rem 0}
+.pullquote p{font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--cream);line-height:1.55}
+
+/* ARCH */
+.arch{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2rem;margin:1.5rem 0}
+.arch-row{display:flex;gap:8px;margin-bottom:8px}
+.arch-box{flex:1;border:1px solid var(--border);border-radius:2px;padding:10px 14px;text-align:center;background:var(--bg)}
+.arch-box.teal{background:var(--teal-bg);border-color:var(--teal-border)}
+.arch-box.purple{background:var(--purple-bg);border-color:var(--purple-border)}
+.arch-label{font-size:11px;font-weight:700;letter-spacing:0.03em;margin-bottom:3px}
+.arch-sub{font-size:10px;color:var(--cream3)}
+.arch-box.teal .arch-label{color:var(--teal)}
+.arch-box.purple .arch-label{color:var(--purple)}
+.arch-divider{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream3);text-align:center;margin:6px 0}
+.arch-divider.strong{color:var(--purple);font-weight:700}
+
+/* DECISION CARDS */
+.decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0}
+.decision-card{background:var(--bg2);padding:1.5rem;transition:background 0.2s}
+.decision-card:hover{background:var(--bg3)}
+.decision-q{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--cream);letter-spacing:0.01em}
+.decision-a{font-size:13px;color:var(--cream2);line-height:1.7}
+
+/* DEMO CARDS */
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0}
+.demo-card{background:var(--bg2);padding:1.5rem;transition:background 0.2s}
+.demo-card:hover{background:var(--bg3)}
+.demo-type{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--cream3);margin-bottom:8px}
+.demo-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.demo-sub{font-size:12px;color:var(--cream3);line-height:1.6;margin-bottom:12px}
+.conf{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:2px}
+.conf-low{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.conf-med{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+.demo-note{font-size:12px;color:var(--cream3);margin-top:10px;line-height:1.6}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:13px;margin:1.25rem 0}
+th{text-align:left;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--cream3);padding:0 1rem 12px 0;border-bottom:1px solid var(--border)}
+td{padding:12px 1rem 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--cream2)}
+td:first-child{color:var(--cream);font-weight:500}
+td:last-child{color:var(--cream3)}
+
+/* LEARNINGS */
+.learnings-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);margin:1.5rem 0}
+.learning-card{background:var(--bg2);padding:1.5rem;transition:background 0.2s}
+.learning-card:hover{background:var(--bg3)}
+.learning-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--cream3);margin-bottom:10px}
+.learning-title{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--cream)}
+.learning-body{font-size:12px;color:var(--cream2);line-height:1.7}
+
+/* STACK */
+.stack-row{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0}
+.chip{font-family:'DM Mono',monospace;font-size:11px;padding:5px 12px;border:1px solid var(--border2);border-radius:2px;color:var(--cream2)}
+
+/* LINKS */
+.links-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:1rem}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:11px 24px;border-radius:2px;text-decoration:none;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:var(--cream);color:var(--bg);border:1px solid var(--cream)}
+.btn-primary:hover{background:transparent;color:var(--cream)}
+.btn-secondary{background:transparent;color:var(--cream);border:1px solid var(--border2)}
+.btn-secondary:hover{border-color:var(--cream2)}
+
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;margin-top:4rem}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--cream)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;animation:fadeUp 0.6s ease both}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.2s}.d3{animation-delay:0.3s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:0 1.5rem}.container{padding:0 1.5rem}
+  .case-title{font-size:34px}
+  .decision-grid,.demo-grid,.learnings-grid{grid-template-columns:1fr}
+  .arch-row{flex-wrap:wrap}
+  footer{padding:1.5rem;flex-direction:column;gap:1rem}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Ziyi Wang</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+<div class="case-hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <a href="index.html" class="back-link fade-in d1">← All case studies</a>
+    <div class="case-badges fade-in d1">
+      <span class="badge badge-teal">Demo</span>
+      <span class="badge badge-teal">Multi-agent</span>
+      <span class="badge badge-gray">Commercial real estate</span>
+      <span class="badge badge-gray">AI/ML</span>
+    </div>
+    <h1 class="case-title fade-in d2">CRE AgentOS</h1>
+    <p class="case-subtitle fade-in d2">A multi-agent AI platform built to solve the enterprise trust problem</p>
+    <p class="case-meta-line fade-in d3">Built solo · Python + Streamlit · Anthropic API · Tavily API · Demo on local machine</p>
+  </div>
+</div>
+
+<div class="container content">
+  <hr>
+
+  <div class="reveal">
+    <h2>The problem</h2>
+    <p>I started with one question: why do enterprise users try AI tools, see the capability, and still not adopt them?</p>
+    <p>After researching adoption patterns in commercial real estate, finance, and legal — domains where a single wrong answer ends careers — I kept arriving at the same answer. It's not a capability problem. It's a trust problem. Users can't tell when to believe the output.</p>
+    <div class="pullquote">
+      <p>The standard industry response is a disclaimer. "AI can make mistakes. Please verify outputs." That's an abdication of product responsibility. I wanted to build something that earned trust architecturally — not through better prompting or more confident outputs, but through structural honesty about uncertainty.</p>
+    </div>
+    <p>I chose CRE as the domain because the trust stakes are high (a single acquisition decision can involve tens of millions of dollars), the workflows are genuinely multi-dimensional, and market data changes constantly — creating a natural use case for temporal monitoring of AI outputs.</p>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>Architecture</h2>
+    <p>Four layers, each solving a different problem.</p>
+    <div class="arch">
+      <div class="arch-divider">User input</div>
+      <div class="arch-row"><div class="arch-box"><div class="arch-label">Layer 1 — Chat foundation</div><div class="arch-sub">Conversational UI · full history · follow-up memory</div></div></div>
+      <div class="arch-row"><div class="arch-box"><div class="arch-label">Layer 2 — Routing layer</div><div class="arch-sub">Intent classification → one of five destinations</div></div></div>
+      <div class="arch-divider">Routes to one of five destinations</div>
+      <div class="arch-row">
+        <div class="arch-box"><div class="arch-label" style="color:var(--cream2)">Leasing</div><div class="arch-sub">Lease analysis</div></div>
+        <div class="arch-box"><div class="arch-label" style="color:var(--cream2)">Servicing</div><div class="arch-sub">Maintenance</div></div>
+        <div class="arch-box teal"><div class="arch-label">Orchestrator</div><div class="arch-sub">Full analysis</div></div>
+        <div class="arch-box"><div class="arch-label" style="color:var(--cream2)">Broker</div><div class="arch-sub">Market queries</div></div>
+        <div class="arch-box"><div class="arch-label" style="color:var(--cream2)">General</div><div class="arch-sub">CRE chat</div></div>
+      </div>
+      <div class="arch-divider">Three subagents run in parallel (asyncio)</div>
+      <div class="arch-row">
+        <div class="arch-box teal"><div class="arch-label">Lease risk</div><div class="arch-sub">Rollover · concentration</div></div>
+        <div class="arch-box teal"><div class="arch-label">Market</div><div class="arch-sub">Live Tavily search</div></div>
+        <div class="arch-box teal"><div class="arch-label">Operational</div><div class="arch-sub">Capex · condition flags</div></div>
+      </div>
+      <div class="arch-divider">Synthesis call → Property Intelligence Brief</div>
+      <div class="arch-divider strong">Layer 4 — Trust layer (the differentiator)</div>
+      <div class="arch-row">
+        <div class="arch-box purple"><div class="arch-label">Red Team agent</div><div class="arch-sub">Challenges every brief · scores HIGH / MEDIUM / LOW</div></div>
+        <div class="arch-box purple"><div class="arch-label">Drift Detector</div><div class="arch-sub">Snapshots analysis · alerts when conditions change</div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>Key product decisions</h2>
+    <div class="decision-grid">
+      <div class="decision-card">
+        <div class="decision-q">Why a trust layer instead of better prompting?</div>
+        <div class="decision-a">Better prompting makes outputs more confident. More confidence without more accuracy makes the trust problem <em>worse</em>. The Red Team and Drift Detector are architectural answers to a user behavior problem — not a prompt engineering patch.</div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-q">Why make confidence scoring visible?</div>
+        <div class="decision-a">Most AI systems hide uncertainty behind fluent prose. A system that always sounds confident but is sometimes wrong is less trustworthy than one that tells you when it's uncertain. Visible uncertainty is the mechanism through which trust is built.</div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-q">Why parallel subagents instead of sequential?</div>
+        <div class="decision-a">Total latency equals the slowest agent, not the sum of all three. A 45-second wait creates doubt before the user has even read the output. At production scale the UX and cost advantage compounds.</div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-q">Why is the orchestrator a peer, not a supervisor?</div>
+        <div class="decision-a">Single-purpose agents don't need coordination overhead for focused tasks. The orchestrator only activates when a task genuinely requires multiple perspectives. Keeping it as a peer destination keeps the system honest and efficient.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>Live demo</h2>
+    <p>Two real Austin properties at opposite ends of the risk spectrum — demonstrating that the system calibrates to actual signals, not pessimism by default.</p>
+    <div class="demo-grid">
+      <div class="demo-card">
+        <div class="demo-type">Stressed asset</div>
+        <div class="demo-title">310 Congress Ave, Austin TX</div>
+        <div class="demo-sub">Class B CBD office · 71% occupancy · anchor tenant expiring 2027</div>
+        <span class="conf conf-low">Confidence: LOW</span>
+        <div class="demo-note">Red Team fires hard — flags unverified absorption assumptions and rollover concentration risk.</div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-type">Stable asset</div>
+        <div class="demo-title">Arboretum Atrium, Austin TX</div>
+        <div class="demo-sub">Class B suburban office · 87% occupancy · tech tenants, Domain-adjacent submarket</div>
+        <span class="conf conf-med">Confidence: MEDIUM-HIGH</span>
+        <div class="demo-note">Red Team more measured — submarket data is live, lease terms favorable, fewer unverified assumptions.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>Known production gaps</h2>
+    <p>Documented intentionally. Understanding the distance between MVP and production is part of the PM skill.</p>
+    <table>
+      <thead><tr><th>Gap</th><th>Current state</th><th>Production approach</th></tr></thead>
+      <tbody>
+        <tr><td>Routing</td><td>Keyword matching</td><td>LLM intent classifier that reasons about context</td></tr>
+        <tr><td>Memory</td><td>Per-session only</td><td>Vector store for cross-session portfolio recall</td></tr>
+        <tr><td>Orchestrator</td><td>Always runs all 3 agents</td><td>Dynamic subagent selection based on task</td></tr>
+        <tr><td>Red Team</td><td>Surfaces gaps</td><td>Triggers follow-up data retrieval on findings</td></tr>
+        <tr><td>Drift Detector</td><td>Manual trigger</td><td>Scheduled job with push alerts</td></tr>
+        <tr><td>Evals</td><td>Demo data only</td><td>Ground truth CRE benchmark suite</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>What I learned</h2>
+    <div class="learnings-grid">
+      <div class="learning-card">
+        <div class="learning-num">01</div>
+        <div class="learning-title">The eval problem is underrated</div>
+        <div class="learning-body">I have no way to systematically verify the Red Team is finding real problems versus plausible-sounding ones. Building AI products without an eval framework is building with no quality signal.</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">02</div>
+        <div class="learning-title">Routing is where agent systems fail</div>
+        <div class="learning-body">Real user language is messy and context-dependent in ways keyword matching can't handle. The routing layer deserves as much attention as the agents themselves.</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">03</div>
+        <div class="learning-title">Trust is a product problem</div>
+        <div class="learning-body">You can't solve it with a better model. It requires intentional decisions about what the system surfaces, what it admits it doesn't know, and how it behaves when conditions change.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="reveal">
+    <h2>Tech stack</h2>
+    <div class="stack-row">
+      <span class="chip">Python 3.11</span><span class="chip">Streamlit</span><span class="chip">Anthropic API</span><span class="chip">claude-sonnet-4</span><span class="chip">Tavily API</span><span class="chip">PyPDF2</span><span class="chip">asyncio</span><span class="chip">pandas</span>
+    </div>
+    <h2>Links</h2>
+    <div class="links-row">
+      <a href="#" class="btn btn-primary">GitHub repo</a>
+      <a href="#" class="btn btn-secondary">Demo video</a>
+      <a href="#" class="btn btn-secondary">LinkedIn</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <span style="font-family:'Playfair Display',serif;font-size:15px;color:var(--cream2)">Ziyi Wang · AI Product Manager</span>
+  <div class="footer-links">
+    <a href="index.html#work">All work</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="mailto:zwang9571@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
